@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: innoscripta-app
+    container_name: innoscripta_app
+    ports:
+      - "8000:80"  # Map port 8000 on the host to port 80 on the container
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=news_api
+      - DB_USERNAME=root
+      - DB_PASSWORD=rootpassword
+
+  db:
+    image: mysql:8.0
+    container_name: innoscripta_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+      MYSQL_DATABASE: news_api
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
