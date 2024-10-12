@@ -37,8 +37,8 @@ class FetchNewsArticles extends Command
     {
         parent::__construct();
 
-        //$this->newsApiServices[] = new NewsApiService();
-        //$this->newsApiServices[] = new GuardianService();
+        $this->newsApiServices[] = new NewsApiService();
+        $this->newsApiServices[] = new GuardianService();
         $this->newsApiServices[] = new NewYorkTimeService();
     }
 
